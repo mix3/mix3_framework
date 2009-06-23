@@ -6,7 +6,7 @@
   <display-name>Archetype Created Web Application</display-name>
   <filter>
     <filter-name>myFilter</filter-name>
-    <filter-class>org.mix3.framework.MyFileter</filter-class>
+    <filter-class>org.mix3.framework.MyFilter</filter-class>
     <init-param>
       <param-name>applicationClassName</param-name>
       <param-value>framework.Application</param-value>
