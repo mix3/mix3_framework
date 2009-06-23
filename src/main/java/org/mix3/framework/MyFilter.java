@@ -8,6 +8,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 
 public class MyFilter implements Filter{
 	private FilterConfig filterConfig;
@@ -19,6 +20,7 @@ public class MyFilter implements Filter{
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		System.out.println("doFilter");
 		System.out.println(this.filterConfig.getInitParameter("applicationClassName"));
+		System.out.println("URI:"+((HttpServletRequest)request).getRequestURI());
 		for(Object o : request.getParameterMap().keySet()){
 			String key = (String)o;
 			System.out.println("key:"+key+" value:"+request.getParameter(key));
