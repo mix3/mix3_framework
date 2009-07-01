@@ -3,8 +3,10 @@ package org.mix3.framework;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,10 +18,6 @@ public abstract class Application {
 		try{
 			file = new File(getClass().getResource(getURI(request)+".html").getPath());
 			System.out.println("true");
-		}catch(NullPointerException e){
-			System.out.println("false");
-		}
-		try{
 			BufferedReader in
 			   = new BufferedReader(
 			           new InputStreamReader(
@@ -29,7 +27,13 @@ public abstract class Application {
 				response.getResponse().getOutputStream().println(str);
 			}
 			in.close();
-		}catch(IOException e){
+		}catch(NullPointerException e){
+			System.out.println("false");
+		} catch (UnsupportedEncodingException e) {
+			throw new Mix3RuntimeException(e);
+		} catch (FileNotFoundException e) {
+			throw new Mix3RuntimeException(e);
+		} catch (IOException e) {
 			throw new Mix3RuntimeException(e);
 		}
 	}
