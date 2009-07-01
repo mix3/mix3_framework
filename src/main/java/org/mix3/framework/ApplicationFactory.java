@@ -10,11 +10,11 @@ public class ApplicationFactory {
 		try {
 			return (Application)Class.forName(applicationClassName).newInstance();
 		} catch (InstantiationException e) {
-			throw new Mix3RuntimeException();
+			throw new Mix3RuntimeException(e);
 		} catch (IllegalAccessException e) {
-			throw new Mix3RuntimeException();
+			throw new Mix3RuntimeException(e);
 		} catch (ClassNotFoundException e) {
-			throw new Mix3RuntimeException();
+			throw new Mix3RuntimeException(e);
 		}
 	}
 }

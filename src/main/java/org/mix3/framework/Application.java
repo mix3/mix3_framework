@@ -1,32 +1,37 @@
 package org.mix3.framework;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URL;
-import java.util.Map;
+import java.io.InputStreamReader;
 
 import javax.servlet.http.HttpServletRequest;
 
 public abstract class Application {
 	public void setMix3Filter(Mix3Filter mix3Filter){}
-	public void run(HttpServletRequest request, SimpleWrapper response) throws IOException {
-		System.out.println("path:"+getURI(request));
-		System.out.print("param:?");
-		
-		int i = 0;
-		for(Object o : request.getParameterMap().entrySet()){
-			Map.Entry<String, String[]> e = (Map.Entry<String, String[]>)o;
-			if(i != 0){
-				System.out.print("&");
-			}
-			
-			System.out.print(e.getKey()+"="+e.getValue()[0]);
-			i++;
+	public void run(HttpServletRequest request, SimpleWrapper response){
+		System.out.println("run");
+		File file = null;
+		try{
+			file = new File(getClass().getResource(getURI(request)+".html").getPath());
+			System.out.println("true");
+		}catch(NullPointerException e){
+			System.out.println("false");
 		}
-		System.out.println();
-		URL url = this.getClass().getResource(getURI(request)+".html");
-		Boolean exist = new File(url.getPath()).exists();
-		response.getResponse().getOutputStream().println("<html><body>test</body></html>");
+		try{
+			BufferedReader in
+			   = new BufferedReader(
+			           new InputStreamReader(
+			                  new FileInputStream(file),"utf8"));
+			String str = "";
+			while((str = in.readLine()) != null){
+				response.getResponse().getOutputStream().println(str);
+			}
+			in.close();
+		}catch(IOException e){
+			throw new Mix3RuntimeException(e);
+		}
 	}
 	
 	public String getURI(HttpServletRequest request){
