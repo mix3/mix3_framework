@@ -6,10 +6,10 @@
   <display-name>Archetype Created Web Application</display-name>
   <filter>
     <filter-name>myFilter</filter-name>
-    <filter-class>org.mix3.framework.MyFilter</filter-class>
+    <filter-class>org.mix3.framework.Mix3Filter</filter-class>
     <init-param>
       <param-name>applicationClassName</param-name>
-      <param-value>framework.Application</param-value>
+      <param-value>framework.MyApplication</param-value>
     </init-param>
   </filter>
   
@@ -17,4 +17,15 @@
     <filter-name>myFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  <!--
+  <servlet>
+    <servlet-name>Servlet</servlet-name>
+    <servlet-class>org.mix3.framework.Mix3Servlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>Servlet</servlet-name>
+    <url-pattern>/*</url-pattern>
+  </servlet-mapping>
+  -->
 </web-app>
