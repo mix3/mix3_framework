@@ -53,6 +53,6 @@
 		</plugins>
   </build>
 	<properties>
-		<jetty.version>6.1.4</jetty.version>
+		<jetty.version>6.1.23</jetty.version>
 	</properties>
 </project>
